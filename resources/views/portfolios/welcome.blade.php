@@ -27,19 +27,13 @@
 
             <!-- Right Actions Group: Log in/Dashboard, Theme Toggle, and Get Started -->
             <div style="display: flex; align-items: center; gap: 12px;">
-                @auth
-                    <a href="{{ route('home') }}" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 14px;">Dashboard</a>
-                @else
-                    <a href="{{ route('login') }}" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 14px;">Log in</a>
-                @endauth
-
-                <!-- Theme Toggle Button -->
-            
 
                 <!-- Primary Action Button -->
                 @auth
+
                     <a class="button primary" href="{{ route('home') }}" style="min-height: 38px; padding: 6px 16px; font-size: 13px;">Dashboard →</a>
                 @else
+                    <a href="{{ route('login') }}" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 14px;">Log in</a>
                     <a class="button primary" href="{{ route('register') }}" style="min-height: 38px; padding: 6px 16px; font-size: 13px;">Get Started</a>
                 @endauth
 
