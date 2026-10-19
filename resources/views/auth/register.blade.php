@@ -253,6 +253,7 @@
             font-weight: 700;
             cursor: pointer;
             box-shadow: 0 4px 15px var(--accent-glow);
+            text-align: center; 
         }
 
         .btn-submit:hover {
@@ -405,12 +406,10 @@
                 Continue with Google
             </a>
 
-            <div class="divider">or</div>
-             <div class="actions-bottom">
-                        
-                           <p>Already have an account? <a class="login-link" href="{{ route('login') }}">log in here</a></p>
-                        
-            </div>
+            <div class="divider"> </div>
+                <div class="actions-bottom">            
+                    <p>Already have an account? <a class="login-link" href="{{ route('login') }}">log in here</a></p>  
+                </div>
 
         </div>
     </div>
