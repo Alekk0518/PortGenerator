@@ -44,205 +44,278 @@
     <title>{{ $name }} — Portfolio</title>
     <link rel="icon" type="image/png" href="{{ asset('images/LOGO.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/css/templates/simple.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 14px;
+            bottom: 0;
+            left: 11px;
+            width: 2px;
+            background-color: #cbd5e1;
+            z-index: 0;
+        }
+    </style>
 </head>
-<body class="bg-white text-neutral-900 font-sans antialiased selection:bg-neutral-900 selection:text-white min-h-screen">
+<body class="bg-gray-100 text-slate-800 font-sans antialiased min-h-screen py-8">
 
-    <main class="max-w-2xl mx-auto px-6 py-16 space-y-16">
-
-        <!-- Header / Hero Section -->
-        <header class="space-y-6">
-            <div class="flex items-center justify-between">
-                @if(!empty($photo))
-                    <img src="{{ $photo }}" alt="{{ $name }}" class="w-16 h-16 rounded-full object-cover grayscale">
-                @else
-                    <div class="w-16 h-16 rounded-full bg-neutral-100 flex items-center justify-center text-lg font-medium text-neutral-600">
-                        {{ strtoupper(substr($name, 0, 2)) }}
-                    </div>
-                @endif
-                <div class="text-right text-xs text-neutral-500 space-y-1">
-                    @if($email) <div><a href="mailto:{{ $email }}" class="hover:underline">{{ $email }}</a></div> @endif
-                    @if($phone) <div>{{ $phone }}</div> @endif
-                    @if($location) <div>{{ $location }}</div> @endif
+    <div class="max-w-5xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden border border-gray-200">
+        
+        <!-- Header / Banner Section -->
+        <header class="bg-[#212b59] text-white py-10 px-8 relative">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                <!-- Spacer for avatar overflow on desktop -->
+                <div class="hidden md:block md:col-span-4"></div>
+                
+                <div class="md:col-span-8 text-center md:text-left">
+                    <h1 class="text-3xl md:text-4xl font-bold uppercase tracking-wider text-white">
+                        {{ $name }}
+                    </h1>
+                    <p class="text-slate-300 font-medium text-sm md:text-base uppercase tracking-widest mt-1">
+                        {{ $headline }}
+                    </p>
                 </div>
             </div>
-
-            <div class="space-y-2 pt-4">
-                <h1 class="text-3xl font-normal tracking-tight text-neutral-900">
-                    {{ $name }}
-                </h1>
-                <p class="text-neutral-500 text-sm">
-                    {{ $headline }}
-                </p>
-            </div>
-            
-            <p class="text-neutral-600 text-sm leading-relaxed">
-                {{ $about }}
-            </p>
         </header>
 
-        <hr class="border-neutral-100">
-
-        <!-- PROJECTS SECTION -->
-        @if($groupedSections->has('projects') || !empty($portfolio->projects))
-            <section id="projects" class="space-y-6">
-                <h2 class="text-xs font-mono uppercase tracking-widest text-neutral-400">Projects</h2>
-                <div class="space-y-8">
-                    @if($groupedSections->has('projects'))
-                        @foreach($groupedSections['projects'] as $item)
-                            @if(!empty($item->content['title']))
-                                <div class="space-y-2">
-                                    <div class="flex items-baseline justify-between">
-                                        <h3 class="text-sm font-medium text-neutral-900">{{ $item->content['title'] }}</h3>
-                                        @if(!empty($item->content['link']))
-                                            <a href="{{ $item->content['link'] }}" target="_blank" rel="noopener noreferrer" class="text-xs text-neutral-400 hover:text-neutral-900 transition-colors">
-                                                Link →
-                                            </a>
-                                        @endif
-                                    </div>
-                                    @if(!empty($item->content['description']))
-                                        <p class="text-xs text-neutral-500 leading-relaxed">{{ $item->content['description'] }}</p>
-                                    @endif
-                                </div>
-                            @endif
-                        @endforeach
+        <!-- Main Content Area with 2-Column Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 relative">
+            
+            <!-- Left Sidebar -->
+            <aside class="md:col-span-4 bg-[#eef2f6] px-6 pb-12 pt-6 md:pt-0 relative border-r border-slate-200">
+                
+                <!-- Circular Profile Photo -->
+                <div class="flex justify-center md:justify-start md:-mt-24 mb-8 relative z-10">
+                    @if(!empty($photo))
+                        <img src="{{ $photo }}" alt="{{ $name }}" class="w-40 h-40 rounded-full object-cover border-4 border-white shadow-md">
+                    @else
+                        <div class="w-40 h-40 rounded-full bg-[#dbe5f1] border-4 border-white shadow-md flex items-center justify-center text-4xl font-bold text-[#212b59]">
+                            {{ strtoupper(substr($name, 0, 1)) }}
+                        </div>
                     @endif
                 </div>
-            </section>
-        @endif
 
-        <!-- BACKGROUND (EDUCATION & EXPERIENCE) SECTION -->
-        @if($groupedSections->has('education') || !empty($portfolio->experience))
-            <section id="experience" class="space-y-6">
-                <h2 class="text-xs font-mono uppercase tracking-widest text-neutral-400">Experience & Education</h2>
                 <div class="space-y-8">
-                    @if(!empty($portfolio->experience))
-                        <div class="space-y-1">
-                            <h3 class="text-sm font-medium text-neutral-900">Work Experience</h3>
-                            <p class="text-xs text-neutral-500 whitespace-pre-line leading-relaxed pt-1">{{ $portfolio->experience }}</p>
+                    
+                    <!-- Contact Section -->
+                    @if($email || $phone || $location)
+                        <div>
+                            <h2 class="text-sm font-bold uppercase tracking-widest text-[#212b59] pb-2 border-b-2 border-slate-300 mb-4">
+                                Contact
+                            </h2>
+                            <ul class="space-y-3 text-xs text-slate-600">
+                                @if($phone)
+                                    <li class="flex items-center gap-3">
+                                        <i class="fa-solid fa-phone text-[#212b59] w-4"></i>
+                                        <span>{{ $phone }}</span>
+                                    </li>
+                                @endif
+                                @if($email)
+                                    <li class="flex items-center gap-3 break-all">
+                                        <i class="fa-solid fa-envelope text-[#212b59] w-4"></i>
+                                        <a href="mailto:{{ $email }}" class="hover:underline">{{ $email }}</a>
+                                    </li>
+                                @endif
+                                @if($location)
+                                    <li class="flex items-center gap-3">
+                                        <i class="fa-solid fa-location-dot text-[#212b59] w-4"></i>
+                                        <span>{{ $location }}</span>
+                                    </li>
+                                @endif
+                            </ul>
                         </div>
                     @endif
 
-                    @if($groupedSections->has('education'))
-                        <div class="space-y-4">
-                            <h3 class="text-sm font-medium text-neutral-900">Education</h3>
+                    <!-- Skills Section -->
+                    @if(count($skillsArray) > 0)
+                        <div>
+                            <h2 class="text-sm font-bold uppercase tracking-widest text-[#212b59] pb-2 border-b-2 border-slate-300 mb-4">
+                                Skills
+                            </h2>
+                            <ul class="list-disc list-inside space-y-1.5 text-xs text-slate-700">
+                                @foreach($skillsArray as $s)
+                                    <li>{{ $s }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <!-- Projects Section -->
+                    @if($groupedSections->has('projects') || !empty($portfolio->projects))
+                        <div>
+                            <h2 class="text-sm font-bold uppercase tracking-widest text-[#212b59] pb-2 border-b-2 border-slate-300 mb-4">
+                                Projects
+                            </h2>
                             <div class="space-y-4">
-                                @foreach($groupedSections['education'] as $item)
-                                    @if(!empty($item->content['school']))
-                                        <div class="flex justify-between items-baseline text-xs">
-                                            <div>
-                                                <span class="font-medium text-neutral-900">{{ $item->content['school'] }}</span>
-                                                @if(!empty($item->content['degree']))
-                                                    <span class="text-neutral-500 block pt-0.5">{{ $item->content['degree'] }}</span>
+                                @if($groupedSections->has('projects'))
+                                    @foreach($groupedSections['projects'] as $item)
+                                        @if(!empty($item->content['title']))
+                                            <div class="text-xs">
+                                                <div class="font-bold text-slate-800 flex justify-between items-baseline">
+                                                    <span>{{ $item->content['title'] }}</span>
+                                                    @if(!empty($item->content['link']))
+                                                        <a href="{{ $item->content['link'] }}" target="_blank" class="text-blue-600 hover:underline text-[10px]">View →</a>
+                                                    @endif
+                                                </div>
+                                                @if(!empty($item->content['description']))
+                                                    <p class="text-slate-600 text-[11px] mt-1 leading-relaxed">{{ $item->content['description'] }}</p>
                                                 @endif
                                             </div>
-                                            @if(!empty($item->content['year']))
-                                                <span class="text-neutral-400 font-mono">{{ $item->content['year'] }}</span>
-                                            @endif
-                                        </div>
-                                    @endif
-                                @endforeach
+                                        @endif
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     @endif
-                </div>
-            </section>
-        @endif
 
-        <!-- SKILLS SECTION -->
-        @if(count($skillsArray) > 0)
-            <section id="skills" class="space-y-4">
-                <h2 class="text-xs font-mono uppercase tracking-widest text-neutral-400">Skills</h2>
-                <div class="flex flex-wrap gap-2">
-                    @foreach($skillsArray as $s)
-                        <span class="text-xs text-neutral-600 bg-neutral-100 px-2.5 py-1 rounded">
-                            {{ $s }}
-                        </span>
-                    @endforeach
-                </div>
-            </section>
-        @endif
+                    <!-- Social Links Section -->
+                    @if(count($socials) > 0)
+                        <div>
+                            <h2 class="text-sm font-bold uppercase tracking-widest text-[#212b59] pb-2 border-b-2 border-slate-300 mb-4">
+                                Social Links
+                            </h2>
+                            <ul class="space-y-2 text-xs">
+                                @foreach($socials as $l)
+                                    <li>
+                                        <a href="{{ $l['url'] }}" target="_blank" class="text-slate-700 hover:text-[#212b59] hover:underline flex items-center gap-2">
+                                            <i class="fa-solid fa-link text-[10px] text-[#212b59]"></i>
+                                            {{ $l['label'] }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
-        <!-- SOCIAL LINKS -->
-        @if(count($socials) > 0)
-            <section id="social" class="space-y-4">
-                <h2 class="text-xs font-mono uppercase tracking-widest text-neutral-400">Connect</h2>
-                <div class="flex flex-wrap gap-4 text-xs">
-                    @foreach($socials as $l)
-                        <a href="{{ $l['url'] }}" target="_blank" rel="noopener noreferrer" class="text-neutral-600 hover:text-neutral-900 underline underline-offset-4">
-                            {{ $l['label'] }}
-                        </a>
-                    @endforeach
                 </div>
-            </section>
-        @endif
+            </aside>
 
-        <!-- Shareable Link Box -->
-        @auth
-            <section class="border-t border-neutral-100 pt-8 space-y-4">
-                <div>
-                    <h3 class="text-xs font-mono uppercase tracking-widest text-neutral-400">Publish & Share</h3>
-                </div>
-                @if($hasId)
-                    <div class="flex flex-col sm:flex-row items-center gap-2">
-                        <input type="text" id="portfolio-url" readonly value="{{ $shareUrl }}" 
-                               class="bg-neutral-50 border border-neutral-200 text-neutral-600 text-xs px-3 py-2 rounded w-full outline-none select-all">
-                        <button onclick="copyPortfolioUrl()" id="copy-btn" class="w-full sm:w-auto px-4 py-2 bg-neutral-900 hover:bg-neutral-800 text-white text-xs rounded transition-all shrink-0">
-                            Copy
-                        </button>
+            <!-- Right Main Content Area (Timeline Style) -->
+            <main class="md:col-span-8 p-8 md:p-10 space-y-10 relative timeline-line">
+
+                <!-- About Me -->
+                <div class="relative z-10 pl-8">
+                    <div class="absolute -left-[1px] top-0.5 w-6 h-6 rounded-full bg-[#212b59] flex items-center justify-center">
+                        <div class="w-2 h-2 rounded-full bg-white"></div>
                     </div>
-                    <div class="flex gap-4 pt-2 text-xs">
-                        <a href="{{ $editUrl }}" class="text-neutral-600 hover:underline">Edit Portfolio</a>
-                        <form action="{{ route('portfolios.destroy', $portfolio->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this portfolio?');" class="inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:underline">Delete</button>
-                        </form>
+                    <h2 class="text-base font-bold uppercase tracking-wider text-[#212b59] pb-1 border-b border-slate-300 mb-3">
+                        About Me
+                    </h2>
+                    <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+                        {{ $about }}
+                    </p>
+                </div>
+
+                <!-- Work Experience -->
+                @if(!empty($portfolio->experience))
+                    <div class="relative z-10 pl-8">
+                        <div class="absolute -left-[1px] top-0.5 w-6 h-6 rounded-full bg-[#212b59] flex items-center justify-center">
+                            <div class="w-2 h-2 rounded-full bg-white"></div>
+                        </div>
+                        <h2 class="text-base font-bold uppercase tracking-wider text-[#212b59] pb-1 border-b border-slate-300 mb-4">
+                            Work Experience
+                        </h2>
+                        <div class="text-xs md:text-sm text-slate-700 whitespace-pre-line leading-relaxed">
+                            {{ $portfolio->experience }}
+                        </div>
                     </div>
-                @else
-                    <p class="text-xs text-neutral-400">This is a live preview. Choose this template from the setup screen to generate your final portfolio.</p>
                 @endif
-            </section>
+
+                <!-- Educational Background -->
+                @if($groupedSections->has('education'))
+                    <div class="relative z-10 pl-8">
+                        <div class="absolute -left-[1px] top-0.5 w-6 h-6 rounded-full bg-[#212b59] flex items-center justify-center">
+                            <div class="w-2 h-2 rounded-full bg-white"></div>
+                        </div>
+                        <h2 class="text-base font-bold uppercase tracking-wider text-[#212b59] pb-1 border-b border-slate-300 mb-4">
+                            Educational Background
+                        </h2>
+                        <div class="space-y-4">
+                            @foreach($groupedSections['education'] as $item)
+                                @if(!empty($item->content['school']))
+                                    <div class="flex justify-between items-start text-xs md:text-sm">
+                                        <div>
+                                            <h3 class="font-bold text-slate-800">{{ $item->content['degree'] ?? 'Degree / Major' }}</h3>
+                                            <p class="text-slate-600 text-xs mt-0.5">{{ $item->content['school'] }}</p>
+                                        </div>
+                                        @if(!empty($item->content['year']))
+                                            <span class="text-xs font-semibold text-slate-500 whitespace-nowrap ml-4">
+                                                {{ $item->content['year'] }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
+            </main>
+        </div>
+
+        <!-- Shareable Link Box / Action Banner -->
+        @auth
+            <div class="bg-[#192142] text-white p-6 border-t border-slate-800">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-sm font-bold text-white">Share Your Portfolio</h3>
+                        <p class="text-xs text-slate-400">Copy your portfolio link to share it with others.</p>
+                    </div>
+                    @if($hasId)
+                        <div class="flex items-center gap-2 w-full md:w-auto">
+                            <input type="text" id="portfolio-url" readonly value="{{ $shareUrl }}" 
+                                   class="bg-white text-slate-800 text-xs px-3 py-2 rounded w-full md:w-72 outline-none select-all">
+                            <button onclick="copyPortfolioUrl()" id="copy-btn" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded transition-all shrink-0">
+                                Copy Link
+                            </button>
+                            <a href="{{ $editUrl }}" class="px-4 py-2 border border-slate-600 hover:bg-slate-800 text-white text-xs font-semibold rounded transition-all shrink-0">
+                                Edit Portfolio
+                            </a>
+                        </div>
+                    @else
+                        <p class="text-xs text-slate-400">This is a live preview. Choose this template from the setup screen to generate your final portfolio.</p>
+                    @endif
+                </div>
+            </div>
         @endauth
 
-        <script>
-            function copyPortfolioUrl() {
-                const urlInput = document.getElementById('portfolio-url');
-                if(!urlInput) return;
-                urlInput.select();
-                urlInput.setSelectionRange(0, 99999);
-                navigator.clipboard.writeText(urlInput.value);
-                const btn = document.getElementById('copy-btn');
-                btn.innerText = 'Copied';
-                setTimeout(() => {
-                    btn.innerText = 'Copy';
-                }, 2000);
-            }
-        </script>
-
         <!-- Footer -->
-        <footer class="pt-8 border-t border-neutral-100 text-xs text-neutral-400 flex justify-between">
-            <p>© {{ date('Y') }} {{ $name }}.</p>
-            <p>PortGen</p>
+        <footer class="bg-slate-100 py-4 text-center text-xs text-slate-500 border-t border-slate-200">
+            © {{ date('Y') }} {{ $name }}. All rights reserved.
         </footer>
 
-    </main>
+    </div>
 
     <!-- Floating Dashboard Button -->
-   <!-- Floating Back / Dashboard Button with Dynamic Preview Support -->
     @auth
         <div style="position: fixed; bottom: 25px; right: 25px; z-index: 100;">
             @if(isset($fromTemplate) && $fromTemplate)
-                <a href="{{ route('portfolios.chooseTemplate') }}" class="button" style="box-shadow: 0 10px 25px rgba(0,0,0,0.15);">
+                <a href="{{ route('portfolios.chooseTemplate') }}" class="px-4 py-2.5 bg-slate-900 text-white text-xs font-semibold rounded-full shadow-2xl hover:bg-slate-800 transition-all inline-block">
                     &larr; Back to Templates
                 </a>
             @else
-                <a href="{{ route('home') }}" class="button" style="box-shadow: 0 10px 25px rgba(0,0,0,0.15);">
+                <a href="{{ route('home') }}" class="px-4 py-2.5 bg-slate-900 text-white text-xs font-semibold rounded-full shadow-2xl hover:bg-slate-800 transition-all inline-block">
                     &larr; Dashboard
                 </a>
             @endif
         </div>
     @endauth
+
+    <script>
+        function copyPortfolioUrl() {
+            const urlInput = document.getElementById('portfolio-url');
+            if(!urlInput) return;
+            urlInput.select();
+            urlInput.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(urlInput.value);
+            const btn = document.getElementById('copy-btn');
+            btn.innerText = 'Copied';
+            setTimeout(() => {
+                btn.innerText = 'Copy Link';
+            }, 2000);
+        }
+    </script>
 
 </body>
 </html>
