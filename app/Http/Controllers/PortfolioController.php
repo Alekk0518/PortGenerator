@@ -46,7 +46,7 @@ class PortfolioController extends Controller
             // Projects array validation[cite: 10]
             'projects'             => 'nullable|array',
             'projects.*.title'     => 'nullable|string|max:255',
-            'projects.*.link'      => 'nullable|url|max:255',
+            'projects.*.link'      => 'nullable|string|max:255',
             'projects.*.description' => 'nullable|string',
 
             'github'         => 'nullable|string|max:255',
