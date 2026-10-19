@@ -137,7 +137,7 @@
                                     <form action="{{ route('portfolios.destroy', $portfolio->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this portfolio?');" style="margin: 0;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="button danger" onclick="openDeleteModal('{{ route('portfolios.destroy', $portfolio->id) }}', '{{ addslashes($portfolio->full_name) }}')" style="padding: 4px 10px; font-size: 11px; min-height: 28px; cursor: pointer;">Delete</button>
+                                        <button type="submit" class="button danger" style="padding: 4px 10px; font-size: 11px; min-height: 28px; cursor: pointer;">Delete</button>
                                     </form>
                                 </div>
                             </div>
