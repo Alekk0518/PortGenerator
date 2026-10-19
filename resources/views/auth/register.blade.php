@@ -389,11 +389,7 @@
                         Register
                     </button>
 
-                    <div class="actions-bottom">
-                        <a class="login-link" href="{{ route('login') }}">
-                            Already registered?
-                        </a>
-                    </div>
+                   
                 </div>
             </form>
 
@@ -408,6 +404,14 @@
                 </svg>
                 Continue with Google
             </a>
+
+            <div class="divider">or</div>
+             <div class="actions-bottom">
+                        
+                           <p>Already have an account? <a class="login-link" href="{{ route('login') }}">log in here</a></p>
+                        
+            </div>
+
         </div>
     </div>
 
