@@ -53,7 +53,7 @@ class PortfolioController extends Controller
             'linkedin'       => 'nullable|string|max:255',
             'twitter'        => 'nullable|string|max:255',
             'facebook'       => 'nullable|string|max:255',
-            'profile_image'  => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'profile_image'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
         
         // 1. Handle image upload first so the path is included in $validated[cite: 10]
