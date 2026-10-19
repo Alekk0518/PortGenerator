@@ -353,7 +353,7 @@
     <header>
         <nav>
             <a href="{{ url('/') }}" class="logo">
-                <img src="{{ asset('images/logo.png') }}" alt="PortGen Logo" class="logo-img">
+                <img src="{{ asset('images/LOGO.png') }}" alt="PortGen Logo" class="logo-img">
                 <span>PortGen</span>
             </a>
             <a href="{{ url('/') }}" class="back-home">&larr; Back to Home</a>
