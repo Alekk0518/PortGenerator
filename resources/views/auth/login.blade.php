@@ -123,8 +123,8 @@
         }
 
         .logo-img {
-            height: 34px; /* Adjust height to fit nicely inside the nav bar */
-            width: auto;
+            height: 38px; /* Adjust this value if you want it slightly bigger or smaller */
+            width: auto;  /* Keeps the aspect ratio correct */
             object-fit: contain;
         }
 
@@ -350,15 +350,14 @@
     </div>
     <canvas id="waveCanvas" aria-hidden="true"></canvas>
 
-    <header>
-        <nav>
-            <a href="{{ url('/') }}" class="logo">
-                <img src="{{ asset('images/LOGO.png') }}" alt="PortGen Logo" class="logo-img">
-                <span>PortGen</span>
-            </a>
-            <a href="{{ url('/') }}" class="back-home">&larr; Back to Home</a>
-        </nav>
-    </header>
+<header>
+    <nav>
+        <a href="{{ url('/') }}" class="logo">
+            <img src="{{ asset('images/LOGO.png') }}" alt="PortGen" class="logo-img">
+        </a>
+        <a href="{{ url('/') }}" class="back-home">&larr; Back to Home</a>
+    </nav>
+</header>
 
     <div class="main-content">
         <div class="login-card">
