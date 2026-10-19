@@ -111,21 +111,12 @@
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px; /* Space between logo image and text */
             color: var(--accent-blue);
             font-family: 'Sansation', sans-serif;
             font-size: 26px;
             font-weight: 700;
             letter-spacing: 0.5px;
             text-decoration: none;
-        }
-
-        .logo-img {
-            height: 38px; /* Adjust this value if you want it slightly bigger or smaller */
-            width: auto;  /* Keeps the aspect ratio correct */
-            object-fit: contain;
         }
 
         .back-home {
@@ -249,6 +240,16 @@
             margin-top: 24px;
         }
 
+        a.forgot-link {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-decoration: underline;
+        }
+
+        a.forgot-link:hover {
+            color: var(--accent-blue);
+        }
+
         .btn-submit {
             width: 100%;
             padding: 10px 22px;
@@ -350,14 +351,17 @@
     </div>
     <canvas id="waveCanvas" aria-hidden="true"></canvas>
 
-<header>
-    <nav>
-        <a href="{{ url('/') }}" class="logo">
-            <img src="{{ asset('images/LOGO.png') }}" alt="PortGen" class="logo-img">
-        </a>
-        <a href="{{ url('/') }}" class="back-home">&larr; Back to Home</a>
-    </nav>
-</header>
+   <header>
+
+        <nav>
+
+            <a href="{{ url('/') }}" class="logo">PortGen</a>
+
+            <a href="{{ url('/') }}" class="back-home">&larr; Back to Home</a>
+
+        </nav>
+
+    </header> 
 
     <div class="main-content">
         <div class="login-card">
