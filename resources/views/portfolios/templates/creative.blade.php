@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/templates/creative.css">
     <title>{{ $portfolio->full_name }} | Creative Portfolio</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/LOGO.png') }}">
+
 </head>
 <body>
 
