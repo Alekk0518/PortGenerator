@@ -241,6 +241,10 @@
             color: var(--accent-blue);
         }
 
+        .actions-bottom {
+            text-align: center;
+        }
+
         .btn-submit {
             width: 100%;
             padding: 10px 22px;
